@@ -58,7 +58,12 @@ jobs:
       - name: 创建必要目录
         run: |
           mkdir -p data logs reports
-      
+      - name: Run Data Fetcher
+        env:
+          HTTP_PROXY: ${{ secrets.DOMESTIC_HTTP_PROXY }}
+          HTTPS_PROXY: ${{ secrets.DOMESTIC_HTTPS_PROXY }}
+        run: |
+          python main.py
       - name: 执行股票分析
         env:
           # ==========================================
